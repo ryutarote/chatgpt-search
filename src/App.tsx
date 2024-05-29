@@ -5,6 +5,7 @@ import {
 	Typography,
 	Container,
 	CircularProgress,
+	Input,
 } from '@mui/material';
 import useCache from './hooks/useCache';
 import useFileProcessor from './hooks/useFileProcessor';
@@ -75,15 +76,16 @@ export default function App() {
 						</>
 					)}
 					<Button
+						component='label'
 						variant='contained'
 						color='primary'
 						style={{ marginTop: '1rem' }}
 					>
 						Upload ChatGPT Zip File
-						<input
+						<Input
 							type='file'
 							accept='.zip'
-							hidden
+							style={{ display: 'none' }}
 							onChange={handleFileUpload}
 						/>
 					</Button>
