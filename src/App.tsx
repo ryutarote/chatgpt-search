@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'preact/hooks';
 import {
 	TextField,
-	Button,
 	Typography,
 	Container,
 	CircularProgress,
@@ -10,6 +9,7 @@ import {
 import useCache from './hooks/useCache';
 import useFileProcessor from './hooks/useFileProcessor';
 import SearchResults, { Conversation } from './SearchResults';
+import FileUploader from './FileUploader';
 
 export default function App() {
 	// Custom hooks for cache management and file processing
@@ -19,6 +19,8 @@ export default function App() {
 	const [conversations, setConversations] = useState<Conversation[]>([]);
 	const [input, setInput] = useState('');
 	const [loading, setLoading] = useState(true);
+	const [fileUploadSuccess, setFileUploadSuccess] = useState(false);
+	const [fileUploadLoading, setFileUploadLoading] = useState(false);
 
 	useEffect(() => {
 		async function initConversations() {
@@ -32,10 +34,20 @@ export default function App() {
 	const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = (e.target as HTMLInputElement)?.files?.[0];
 		if (!file) return;
+		setFileUploadLoading(true);
 		const conversations = await processFile(file);
 		setConversations(conversations);
 		await cachePutFile(file, 'file');
 		await cachePutJson(conversations, 'json');
+		setFileUploadLoading(false);
+		setFileUploadSuccess(true);
+	};
+
+	const asyncFileUploadEvent = {
+		loading: fileUploadLoading,
+		execute: () => {
+			document.getElementById('file-upload-input')?.click();
+		},
 	};
 
 	return (
@@ -75,20 +87,18 @@ export default function App() {
 							<SearchResults input={input} conversations={conversations} />
 						</>
 					)}
-					<Button
-						component='label'
-						variant='contained'
-						color='primary'
-						style={{ marginTop: '1rem' }}
-					>
-						Upload ChatGPT Zip File
-						<Input
-							type='file'
-							accept='.zip'
-							style={{ display: 'none' }}
-							onChange={handleFileUpload}
-						/>
-					</Button>
+					<FileUploader
+						asyncEvent={asyncFileUploadEvent}
+						success={fileUploadSuccess}
+						text='Upload ChatGPT Zip File'
+					/>
+					<Input
+						id='file-upload-input'
+						type='file'
+						accept='.zip'
+						style={{ display: 'none' }}
+						onChange={handleFileUpload}
+					/>
 				</>
 			)}
 		</Container>
