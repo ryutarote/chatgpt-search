@@ -25,6 +25,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  "ts-standard": {
+    "ignore": [
+      "dist",
+      "./vite.config.ts",
+      "src/**/*.js"
+    ]
+  },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

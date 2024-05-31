@@ -6,7 +6,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc && vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"lint": "npx ts-standard --fix"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.4",
@@ -22,6 +23,8 @@
 	"devDependencies": {
 		"@preact/preset-vite": "^2.8.2",
 		"@types/tiny-segmenter": "^0.2.0",
+		"eslint": "^8.57.0",
+		"ts-standard": "^12.0.2",
 		"typescript": "^5.2.2",
 		"vite": "^5.2.0"
 	}
