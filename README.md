@@ -5,12 +5,15 @@
 ## Overview
 
 This tool enables you to search through your ChatGPT chat history, supporting both English and Japanese. 
+
 The links you find will direct you to the corresponding chat on chatgpt.com.
 
 ## Purpose
 
 ChatGPT does not offer a built-in search functionality for your chat history. 
+
 While there are extensions and tools designed to address this limitation, they often fall short in various ways. 
+
 This tool aims to provide a simple and efficient solution to search through your ChatGPT conversations.
 
 ## Usage
