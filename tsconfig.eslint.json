@@ -1,0 +1,5 @@
+{
+  "ts-standard": {
+    "project": "./tsconfig.json"
+  }
+}
